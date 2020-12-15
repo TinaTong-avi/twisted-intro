@@ -71,6 +71,9 @@ class PoetryClientFactory(ClientFactory):
 
     def poem_finished(self, poem):
         if self.deferred is not None:
+            """
+            release our reference to the deferred after it's fired. This is a pattern 
+            """
             d, self.deferred = self.deferred, None
             d.callback(poem.decode('utf8'))
 
